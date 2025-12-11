@@ -1,6 +1,7 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_mysqldb import MySQL
+from logger_client import send_log   
 
 app = Flask(__name__)
 
@@ -22,11 +23,16 @@ def init_db():
             message TEXT
         );
         ''')
-        mysql.connection.commit()  
+        mysql.connection.commit()
         cur.close()
+
+@app.before_request
+def log_request():
+    send_log("info", f"Incoming request: {request.method} {request.path}")
 
 @app.route('/')
 def hello():
+    send_log("info", "Fetching messages from DB")
     cur = mysql.connection.cursor()
     cur.execute('SELECT message FROM messages')
     messages = cur.fetchall()
@@ -36,10 +42,13 @@ def hello():
 @app.route('/submit', methods=['POST'])
 def submit():
     new_message = request.form.get('new_message')
+    send_log("info", f"New message submitted: {new_message}")
+    
     cur = mysql.connection.cursor()
     cur.execute('INSERT INTO messages (message) VALUES (%s)', [new_message])
     mysql.connection.commit()
     cur.close()
+    
     return jsonify({'message': new_message})
 
 if __name__ == '__main__':
