@@ -1,0 +1,28 @@
+{
+  "name": "devops-project-two-tier-flask-app",
+  "version": "1.0.0",
+  "description": "**Author:** Akash Nazarkar\r **Date:** 21 Nov 2025",
+  "main": "logger_service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RangerAkash1/FlaskApplicationWithCi-Cd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RangerAkash1/FlaskApplicationWithCi-Cd/issues"
+  },
+  "homepage": "https://github.com/RangerAkash1/FlaskApplicationWithCi-Cd#readme",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "winston": "^3.19.0",
+    "winston-loki": "^6.1.3"
+  }
+}
