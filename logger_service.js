@@ -12,7 +12,7 @@ const logger = winston.createLogger({
       host: "http://localhost:3100",  // loki endpoint
       labels: { job: "flask_app_logs" },
       json: true,
-      interval: 5
+      interval: 5 // each 5 sec collect the logs
     })
   ]
 });
